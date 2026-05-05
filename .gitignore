@@ -1,0 +1,16 @@
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+ENV/
+*.log
+instance/
+.webassets-cache
+.env
+*.pdf
+*.xlsx
+*.zip
+.DS_Store
