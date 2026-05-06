@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Consolidador de Notas de Crédito</title>
+    <title>Energy Parts - Consolidador de Notas de Crédito</title>
     <style>
         * {
             margin: 0;
@@ -13,7 +13,7 @@
         
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, #1e3a5f 0%, #0d1f35 100%);
             min-height: 100vh;
             display: flex;
             justify-content: center;
@@ -24,56 +24,84 @@
         .container {
             background: white;
             border-radius: 20px;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-            max-width: 800px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+            max-width: 900px;
             width: 100%;
+            padding: 0;
+            overflow: hidden;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #1e3a5f 0%, #2a4d75 100%);
+            padding: 30px 40px;
+            text-align: center;
+            border-bottom: 4px solid #7ed957;
+        }
+        
+        .logo {
+            max-width: 300px;
+            height: auto;
+            margin-bottom: 15px;
+        }
+        
+        .header-title {
+            color: white;
+            font-size: 1.4em;
+            font-weight: 600;
+            margin-top: 10px;
+        }
+        
+        .content {
             padding: 40px;
         }
         
         h1 {
-            color: #333;
+            color: #1e3a5f;
             text-align: center;
             margin-bottom: 10px;
-            font-size: 2.5em;
+            font-size: 2em;
         }
         
         .subtitle {
             text-align: center;
             color: #666;
-            margin-bottom: 40px;
-            font-size: 1.1em;
+            margin-bottom: 30px;
+            font-size: 1.05em;
         }
         
         .upload-area {
-            border: 3px dashed #667eea;
+            border: 3px dashed #7ed957;
             border-radius: 15px;
             padding: 60px 20px;
             text-align: center;
             cursor: pointer;
             transition: all 0.3s;
-            background: #f8f9ff;
+            background: #f8fff8;
         }
         
         .upload-area:hover {
-            background: #eef1ff;
-            border-color: #764ba2;
+            background: #eaffea;
+            border-color: #5fb83f;
+            transform: translateY(-2px);
         }
         
         .upload-area.dragover {
-            background: #e0e7ff;
-            border-color: #4f46e5;
+            background: #d4f5d4;
+            border-color: #4a9c2f;
+            border-width: 4px;
         }
         
         .upload-icon {
             font-size: 4em;
-            color: #667eea;
+            color: #7ed957;
             margin-bottom: 20px;
         }
         
         .upload-text {
             font-size: 1.3em;
-            color: #333;
+            color: #1e3a5f;
             margin-bottom: 10px;
+            font-weight: 600;
         }
         
         .upload-subtext {
@@ -91,18 +119,19 @@
         }
         
         .file-item {
-            background: #f8f9ff;
+            background: #f0f8ff;
             padding: 15px;
             border-radius: 10px;
             margin-bottom: 10px;
             display: flex;
             justify-content: space-between;
             align-items: center;
+            border-left: 4px solid #7ed957;
         }
         
         .file-name {
             font-weight: 500;
-            color: #333;
+            color: #1e3a5f;
         }
         
         .file-remove {
@@ -120,26 +149,29 @@
         }
         
         .process-btn {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, #7ed957 0%, #5fb83f 100%);
             color: white;
             border: none;
-            padding: 15px 40px;
-            font-size: 1.1em;
+            padding: 18px 40px;
+            font-size: 1.15em;
             border-radius: 10px;
             cursor: pointer;
             width: 100%;
             margin-top: 20px;
-            transition: transform 0.2s;
+            transition: all 0.3s;
             font-weight: 600;
+            box-shadow: 0 4px 15px rgba(126, 217, 87, 0.3);
         }
         
         .process-btn:hover {
-            transform: translateY(-2px);
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(126, 217, 87, 0.4);
         }
         
         .process-btn:disabled {
             opacity: 0.6;
             cursor: not-allowed;
+            transform: none;
         }
         
         .loading {
@@ -150,7 +182,7 @@
         
         .spinner {
             border: 4px solid #f3f3f3;
-            border-top: 4px solid #667eea;
+            border-top: 4px solid #7ed957;
             border-radius: 50%;
             width: 50px;
             height: 50px;
@@ -172,13 +204,15 @@
         }
         
         .status-success {
-            background: #d1fae5;
-            color: #065f46;
+            background: #d4f5d4;
+            color: #1e5f1e;
+            border-left: 4px solid #7ed957;
         }
         
         .status-error {
             background: #fee2e2;
             color: #991b1b;
+            border-left: 4px solid #ef4444;
         }
         
         .features {
@@ -192,6 +226,14 @@
         
         .feature {
             text-align: center;
+            padding: 20px;
+            border-radius: 10px;
+            transition: all 0.3s;
+        }
+        
+        .feature:hover {
+            background: #f0f8ff;
+            transform: translateY(-5px);
         }
         
         .feature-icon {
@@ -201,7 +243,7 @@
         
         .feature-title {
             font-weight: 600;
-            color: #333;
+            color: #1e3a5f;
             margin-bottom: 5px;
         }
         
@@ -209,12 +251,26 @@
             color: #666;
             font-size: 0.9em;
         }
+        
+        .footer {
+            background: #f8f9fa;
+            padding: 20px;
+            text-align: center;
+            color: #666;
+            font-size: 0.9em;
+            border-top: 1px solid #e5e7eb;
+        }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>📊 Consolidador NC</h1>
-        <p class="subtitle">Convierte tus Notas de Crédito PDF a Excel consolidado</p>
+        <div class="header">
+            <img src="/static/logo.jpg" alt="Energy Parts" class="logo">
+            <div class="header-title">Consolidador de Notas de Crédito</div>
+        </div>
+        
+        <div class="content">
+            <p class="subtitle">Convierte tus Notas de Crédito PDF a Excel consolidado</p>
         
         <div class="upload-area" id="uploadArea">
             <div class="upload-icon">📄</div>
@@ -252,6 +308,11 @@
                 <div class="feature-title">Descarga ZIP</div>
                 <div class="feature-desc">Todos tus Excel en un solo archivo</div>
             </div>
+        </div>
+        
+        <div class="footer">
+            <strong>Energy Parts</strong> - Sistema de Consolidación de Notas de Crédito<br>
+            Johnson Controls Enterprises Mexico S de R L de C V
         </div>
     </div>
     
